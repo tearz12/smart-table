@@ -36,6 +36,10 @@ export function initData() {
         const response = await fetch(`${BASE_URL}/records?${nextQuery}`);
         const records = await response.json();
 
+        if (!response.ok) {
+            return lastResult ?? {total: 0, items: []};
+        }
+
         lastQuery = nextQuery;
         lastResult = {
             total: records.total,
